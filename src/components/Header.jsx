@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 import light from "../assets/icons/light.png";
 import dark from "../assets/icons/dark.png";
@@ -13,6 +13,39 @@ const themes = [
 ];
 export const Header = () => {
     const [switchActive, setSwitchActive] = useState(false);
+
+    useEffect(() => {
+        const darkOrLight = switchActive
+            ? {
+                  "--color-gray": "#374151",
+                  "--color-gray-hover": "#4d5a70",
+                  "--color": "white",
+                  "--background-light-dark": "#111827",
+                  "--color-h3": "white",
+                  "--color-placeholder": "#b0b0b6",
+                  "--background-textarea": "#1f2937",
+                  "--backgroundModal-light-dark": "#111827",
+              }
+            : {
+                  "--color-gray": "#e5e7eb",
+                  "--color-gray-hover": "#cdcfd3",
+                  "--color": "black",
+                  "--background-light-dark": "none",
+                  "--color-h3": "#374151",
+                  "--color-placeholder": "none",
+                  "--background-textarea": "none",
+                  "--backgroundModal-light-dark": "#eff1f7",
+              };
+
+        const entradas = Object.entries(darkOrLight);
+
+        const root = document.documentElement;
+
+        entradas.forEach(([key, value]) => {
+            root.style.setProperty(key, value);
+        });
+    }, [switchActive]);
+
     const onChange = (checked) => {
         console.log(`switch to ${checked}`);
         setSwitchActive(checked);
