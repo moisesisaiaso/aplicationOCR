@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
 
-export const GetTextOcr = ({ uploadFile, selectedLanguages }) => {
-    const [getText, setGetText] = useState();
+export const GetTextOcr = ({ uploadFile, selectedLanguages, ocr }) => {
     return (
         <>
             <textarea
@@ -11,7 +10,7 @@ export const GetTextOcr = ({ uploadFile, selectedLanguages }) => {
                 placeholder="El texto extraído aparecerá aquí..."
                 className={generalStyles.getTextOcr}
                 disabled={true}
-                value={getText && getText}
+                value={ocr && ocr}
             ></textarea>
         </>
     );

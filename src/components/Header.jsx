@@ -11,8 +11,60 @@ const themes = [
     { label: "Océano", value: "ocean" },
     { label: "Lavanda", value: "lavender" },
 ];
+
+const themesStyles = [
+    {
+        "--color-primary": "#3b82f6",
+        "--color-secondary": "#10b981",
+        "--color-accent": "#14de9b",
+    },
+    {
+        "--color-primary": "#F59E0B",
+        "--color-secondary": "#EF4444",
+        "--color-accent": "#EC4899",
+    },
+    {
+        "--color-primary": "#059669",
+        "--color-secondary": "#84CC16",
+        "--color-accent": "#14B8A6",
+    },
+    {
+        "--color-primary": "#0EA5E9",
+        "--color-secondary": "#06B6D4",
+        "--color-accent": "#6366F1",
+    },
+    {
+        "--color-primary": "#8B5CF6",
+        "--color-secondary": "#A78BFA",
+        "--color-accent": "#C084FC",
+    },
+];
 export const Header = () => {
     const [switchActive, setSwitchActive] = useState(false);
+    const [theme, setTheme] = useState("default");
+
+    const root = document.documentElement;
+
+    useEffect(() => {
+        const themeStyle =
+            theme === "default"
+                ? themesStyles[0]
+                : theme === "sunset"
+                ? themesStyles[1]
+                : theme === "forest"
+                ? themesStyles[2]
+                : theme === "ocean"
+                ? themesStyles[3]
+                : themesStyles[4];
+
+        const entradas = Object.entries(themeStyle);
+
+        entradas.forEach(([key, value]) => {
+            root.style.setProperty(key, value);
+        });
+
+        console.log("hola");
+    }, [theme]);
 
     useEffect(() => {
         const darkOrLight = switchActive
@@ -39,8 +91,6 @@ export const Header = () => {
 
         const entradas = Object.entries(darkOrLight);
 
-        const root = document.documentElement;
-
         entradas.forEach(([key, value]) => {
             root.style.setProperty(key, value);
         });
@@ -55,7 +105,13 @@ export const Header = () => {
             <h1>Aplicacion OCR</h1>
             <div className={generalStyles.headerContainer_right}>
                 <div className={generalStyles.selectContainer}>
-                    <select name="" id="" className={generalStyles.headerContainer_select}>
+                    <select
+                        name=""
+                        id=""
+                        className={generalStyles.headerContainer_select}
+                        value={theme}
+                        onChange={({ target }) => setTheme(target.value)}
+                    >
                         {themes.map((theme, i) => (
                             <option value={theme.value} key={i}>
                                 {theme.label}

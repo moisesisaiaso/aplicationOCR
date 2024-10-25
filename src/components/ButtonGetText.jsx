@@ -3,10 +3,12 @@ import generalStyles from "../assets/styles/generalStyles.module.css";
 import file from "../assets/icons/file.png";
 import sheet from "../assets/icons/sheet.png";
 import { ReloadOutlined } from "@ant-design/icons";
-export const ButtonGetText = ({ completeData }) => {
+export const ButtonGetText = ({ completeData, convertImageToText }) => {
     const [loading, setLoading] = useState(false);
-    const handleClick = () => {
+    const handleClick = async () => {
         setLoading(true);
+        convertImageToText();
+        
         console.log("hola");
     };
     return (

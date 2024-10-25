@@ -6,8 +6,10 @@ import { ModalExpand } from "./components/ModalExpand";
 import { Languages } from "./components/Languages";
 import { ButtonGetText } from "./components/ButtonGetText";
 import { GetTextOcr } from "./components/GetTextOcr";
-
+import { createWorker } from "tesseract.js";
 function App() {
+    const [ocr, setOcr] = useState("");
+
     const [expand, setExpand] = useState(false);
 
     const [uploadImage, setUploadImage] = useState();
@@ -17,6 +19,24 @@ function App() {
     const [selectedLanguages, setSelectedLanguages] = useState([]);
 
     const [completeData, setCompleteData] = useState(false);
+
+    const languagesJoin = selectedLanguages.join("+");
+
+    console.log(uploadFile);
+    const worker = createWorker();
+
+    // convertir imagen a texto
+    const convertImageToText = async () => {
+        console.log("convertir");
+
+        await worker.load();
+        await worker.loadLanguage("eng");
+        await worker.initialize("en");
+        const { data } = await worker.recognize(uploadFile);
+
+        setOcr(data.text);
+        console.log(data.text);
+    };
 
     useEffect(() => {
         uploadImage && selectedLanguages.length !== 0
@@ -59,12 +79,19 @@ function App() {
 
                         {/* Extraer texto */}
                         <section className={generalStyles.container_btnGetText}>
-                            <ButtonGetText completeData={completeData} />
+                            <ButtonGetText
+                                completeData={completeData}
+                                convertImageToText={convertImageToText}
+                            />
                         </section>
                     </div>
                     {/* GetTextOrc */}
                     <section className={generalStyles.containerGetTextOcr}>
-                        <GetTextOcr uploadFile={uploadFile} selectedLanguages={selectedLanguages} />
+                        <GetTextOcr
+                            uploadFile={uploadFile}
+                            selectedLanguages={selectedLanguages}
+                            ocr={ocr}
+                        />
                     </section>
                 </main>
                 {/* mascara de fondo */}

@@ -6,9 +6,11 @@
 
 :root {
     font-size: 16px;
+
+    /* themes */
     --color-primary: #3b82f6;
     --color-secondary: #10b981;
-    --color-accent: #8b5cf6;
+    --color-accent: #14de9b;
 
     /* light - dark */
     --color-gray: #e5e7eb;
@@ -145,6 +147,7 @@ h1 {
 .upload__icon {
     width: 3rem;
     margin-bottom: 1rem;
+    margin-top: 0.5rem;
 }
 
 input {
@@ -180,7 +183,7 @@ input {
     z-index: 10;
     top: 0.7rem;
     right: 0.7rem;
-    background-color: #10b981;
+    background-color: var(--color-accent);
     border-radius: 8px;
     border: 1px solid white;
     cursor: pointer;
@@ -472,7 +475,7 @@ footer h5 {
 
     .containerGroup,
     .containerGetTextOcr {
-        flex-basis: 35rem;
+        flex-basis: 60rem;
         flex-grow: 1;
     }
 
@@ -500,9 +503,9 @@ footer h5 {
 }
 
 /*^ Escritorio y Tv */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1205px) {
     .containerGrid {
-        padding: 3rem 11rem;
+        padding: 3rem 7rem;
     }
 
     header {
