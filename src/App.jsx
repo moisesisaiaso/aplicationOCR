@@ -6,7 +6,10 @@ import { ModalExpand } from "./components/ModalExpand";
 import { Languages } from "./components/Languages";
 import { ButtonGetText } from "./components/ButtonGetText";
 import { GetTextOcr } from "./components/GetTextOcr";
-import Tesseract from "tesseract.js";
+// import Tesseract from "tesseract.js";    importacion por descarga
+
+import Tesseract from 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js';  
+// importacion por CDN
 function App() {
     const [ocr, setOcr] = useState("");
 
