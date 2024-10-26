@@ -7,8 +7,9 @@ export const ButtonGetText = ({ completeData, convertImageToText }) => {
     const [loading, setLoading] = useState(false);
     const handleClick = async () => {
         setLoading(true);
-        convertImageToText();
-        
+        await convertImageToText();
+        setLoading(false);
+
         console.log("hola");
     };
     return (

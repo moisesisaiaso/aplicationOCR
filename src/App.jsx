@@ -6,7 +6,7 @@ import { ModalExpand } from "./components/ModalExpand";
 import { Languages } from "./components/Languages";
 import { ButtonGetText } from "./components/ButtonGetText";
 import { GetTextOcr } from "./components/GetTextOcr";
-import { createWorker } from "tesseract.js";
+import Tesseract from "tesseract.js";
 function App() {
     const [ocr, setOcr] = useState("");
 
@@ -23,19 +23,43 @@ function App() {
     const languagesJoin = selectedLanguages.join("+");
 
     console.log(uploadFile);
-    const worker = createWorker();
+    // (worker es un hilo de trabajo aislado al principal lo que permite que procesos complejos o conuna carca alta se ejecuten en ese hilo, esto evita problemas de rendimiento e interrupciones con la fluidez de la interfaz, eneste caso  el proceso OCR al tener un procesamiento alto puedde interferir con la fluidez de la app y su interfaz por este motivo utilizamos un worker)
+    // crea el worker
 
-    // convertir imagen a texto
+    const outputOpts = {
+        text: true,
+        blocks: true,
+        hocr: true,
+        tsv: true,
+        box: false,
+        unlv: false,
+        osd: false,
+        pdf: false,
+        imageColor: false,
+        imageGrey: false,
+        imageBinary: false,
+    };
+
     const convertImageToText = async () => {
         console.log("convertir");
 
-        await worker.load();
-        await worker.loadLanguage("eng");
-        await worker.initialize("en");
-        const { data } = await worker.recognize(uploadFile);
+        // OJO para que tesseract funcione es necesario externalizarlo, esto se hace desde el archivo vite.config.js;  nos permite evitar conflictos con la libreria encuanto a sus duplicidad de dependencias entre otros
+        const worker = await Tesseract.createWorker(languagesJoin, 1, {
+            logger: (m) => console.log(m),
+        });
+        // Cargar el worker y el idioma
 
-        setOcr(data.text);
-        console.log(data.text);
+        // Realizar el reconocimiento de texto:
+        const {
+            data: { text },
+        } = await worker.recognize(uploadFile, undefined, outputOpts);
+
+        setOcr(text);
+        console.log(text);
+
+        // Terminar el worker
+        await worker.terminate();
+        return text;
     };
 
     useEffect(() => {

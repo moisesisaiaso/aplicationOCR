@@ -3,12 +3,15 @@ import generalStyles from "../assets/styles/generalStyles.module.css";
 
 export const Languages = ({ selectedLanguages, setSelectedLanguages }) => {
     const languages = [
-        { id: "es", name: "Español" },
-        { id: "en", name: "Inglés" },
-        { id: "fr", name: "Francés" },
-        { id: "de", name: "Alemán" },
-        { id: "it", name: "Italiano" },
-        { id: "pt", name: "Portugués" },
+        { id: "spa", name: "Español" },
+        { id: "eng", name: "Inglés" },
+        { id: "fra", name: "Francés" },
+        { id: "deu", name: "Alemán" },
+        { id: "ita", name: "Italiano" },
+        { id: "por", name: "Portugués" },
+        { id: "chi_tra", name: "Chino" },
+        { id: "jpn", name: "Japones" },
+        { id: "ara", name: "Arabe" },
     ];
 
     const handleClick = (id) => {
