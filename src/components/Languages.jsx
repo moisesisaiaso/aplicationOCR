@@ -8,10 +8,10 @@ export const Languages = ({ selectedLanguages, setSelectedLanguages }) => {
         { id: "fra", name: "Francés" },
         { id: "deu", name: "Alemán" },
         { id: "ita", name: "Italiano" },
-        { id: "por", name: "Portugués" },
         { id: "chi_tra", name: "Chino" },
+        { id: "por", name: "Portugués" },
         { id: "jpn", name: "Japones" },
-        { id: "ara", name: "Arabe" },
+        { id: "ara", name: "Árabe" },
     ];
 
     const handleClick = (id) => {

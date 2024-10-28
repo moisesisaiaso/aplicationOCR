@@ -22,18 +22,22 @@ export const ButtonGetText = ({ completeData, convertImageToText }) => {
                 }
                 disabled={!completeData}
                 onClick={handleClick}
+                style={{ backgroundColor: "#FF3B5C" }}
             >
-                <span>
-                    {loading ? (
+                {loading ? (
+                    <span>
                         <ReloadOutlined
                             spin={true}
                             style={{ fontSize: "1.3rem", marginRight: "1rem" }}
                         />
-                    ) : (
+                        Analizando
+                    </span>
+                ) : (
+                    <span>
                         <img src={sheet} alt="iconText" style={{ width: "1.3rem" }} />
-                    )}
-                    Extraer Texto
-                </span>
+                        Extraer Texto
+                    </span>
+                )}
             </button>
         </>
     );

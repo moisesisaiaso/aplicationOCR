@@ -9,18 +9,25 @@
 
     /* themes */
     --color-primary: #3b82f6;
+    --color-primary-hover: #9875eb;
     --color-secondary: #10b981;
     --color-accent: #14de9b;
 
     /* light - dark */
+    --background-color: none;
+    --color-h1: #1f2937;
+    --color-border: rgb(205, 205, 205);
     --color-gray: #e5e7eb;
     --color-gray-hover: #cdcfd3;
     --color: black;
     --color-h3: #374151;
     --background-light-dark: none;
     --color-placeholder: #b0b0b6;
-    --background-textarea: #1f2937;
     --backgroundModal-light-dark: #eff1f7;
+}
+
+body {
+    background-color: var(--background-color);
 }
 
 .containerGrid {
@@ -39,7 +46,7 @@ header {
 h1 {
     text-align: start;
     width: 100%;
-    color: #1f2937;
+    color: var(--color-h1);
     font-weight: 700 !important;
 }
 
@@ -58,11 +65,13 @@ h1 {
 
 .headerContainer_select {
     appearance: none;
+    color: var(--color);
     width: 11rem;
     height: 3.4rem;
     border: 1px solid rgb(205, 205, 205);
     border-radius: 6px;
     padding: 1rem 2.5rem 1rem 1rem;
+    background-color: var(--background-color);
 }
 
 .selectContainer::after {
@@ -85,7 +94,7 @@ h1 {
 
 .headerContainer_select option {
     margin: 5px;
-    background-color: white;
+    background-color: var(--background-light-dark);
 }
 
 .headerContainer_select option:hover {
@@ -122,7 +131,7 @@ h1 {
 /** main */
 
 .container_frame {
-    border: 1.9px solid var(--color-gray);
+    border: 1.9px solid var(--color-border);
     border-radius: 0.8rem;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -326,7 +335,7 @@ hr {
 }
 
 .languages_btns .languages_btnSelected.selected:hover {
-    background-color: #5998fd;
+    background-color: var(--color-primary-hover);
 }
 
 /** Button get Text */
@@ -351,12 +360,12 @@ hr {
 }
 
 .btnGetText:hover {
-    background-color: #5998fd;
+    background-color: var(--color-primary-hover);
 }
 
 .btnGetText:active {
     background-color: var(--color-primary);
-    box-shadow: inset 2px 2px 5px #316dce;
+    box-shadow: inset 2px 2px 5px var(--color-primary-hover);
 }
 
 .btnGetText span {
@@ -373,6 +382,8 @@ hr {
 .containerGetTextOcr {
     width: 100%;
     margin-top: 1.5rem;
+    display: grid;
+    grid-template-rows: 1fr;
 }
 
 .containerGetTextOcr textarea {
@@ -381,12 +392,27 @@ hr {
     border: 1.5px solid var(--color-secondary);
     border-radius: 8px;
     min-height: 10rem;
-    color: var(--color);
-    background-color: var(--background-textarea);
+    color: var(--color-h1);
+    background-color: var(--background-color);
 }
 
 .containerGetTextOcr textarea::placeholder {
-    color: var(--color-placeholder);
+    color: var(--color-h1);
+}
+
+.getTextBtnsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.getTextBtnsContainer button {
+    /* flex-basis: 5rem;
+    flex-grow: 1; */
+
+    width: 12rem;
+    flex-grow: 1;
 }
 
 /** footer */
@@ -399,10 +425,10 @@ footer {
 
 footer h5 {
     text-align: center;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     letter-spacing: 1px;
     font-weight: 600;
-    color: gray;
+    color: var(--color-h1);
 }
 
 /* media query */

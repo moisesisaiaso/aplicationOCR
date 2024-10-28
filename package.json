@@ -12,6 +12,8 @@
     "dependencies": {
         "@ant-design/icons": "^5.5.1",
         "antd": "^5.21.4",
+        "docx": "^9.0.2",
+        "file-saver": "^2.0.5",
         "gestalt": "^162.2.0",
         "jspdf": "^2.5.2",
         "monday-ui-react-core": "^2.139.3",

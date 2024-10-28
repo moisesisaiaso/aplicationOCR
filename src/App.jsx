@@ -8,7 +8,7 @@ import { ButtonGetText } from "./components/ButtonGetText";
 import { GetTextOcr } from "./components/GetTextOcr";
 // import Tesseract from "tesseract.js";    importacion por descarga
 
-import Tesseract from 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js';  
+import Tesseract from "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js";
 // importacion por CDN
 function App() {
     const [ocr, setOcr] = useState("");
@@ -37,7 +37,7 @@ function App() {
         box: false,
         unlv: false,
         osd: false,
-        pdf: false,
+        pdf: true,
         imageColor: false,
         imageGrey: false,
         imageBinary: false,
@@ -114,11 +114,7 @@ function App() {
                     </div>
                     {/* GetTextOrc */}
                     <section className={generalStyles.containerGetTextOcr}>
-                        <GetTextOcr
-                            uploadFile={uploadFile}
-                            selectedLanguages={selectedLanguages}
-                            ocr={ocr}
-                        />
+                        <GetTextOcr ocr={ocr} setOcr={setOcr} uploadFile={uploadFile} />
                     </section>
                 </main>
                 {/* mascara de fondo */}
