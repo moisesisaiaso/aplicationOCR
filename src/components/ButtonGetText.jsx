@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
-import file from "../assets/icons/file.png";
+
 import sheet from "../assets/icons/sheet.png";
 import { ReloadOutlined } from "@ant-design/icons";
-export const ButtonGetText = ({ completeData, convertImageToText }) => {
+
+export const ButtonGetText = ({ completeData, getText }) => {
     const [loading, setLoading] = useState(false);
     const handleClick = async () => {
         setLoading(true);
-        await convertImageToText();
+        await getText();
         setLoading(false);
 
         console.log("hola");
@@ -22,7 +23,6 @@ export const ButtonGetText = ({ completeData, convertImageToText }) => {
                 }
                 disabled={!completeData}
                 onClick={handleClick}
-                style={{ backgroundColor: "#FF3B5C" }}
             >
                 {loading ? (
                     <span>

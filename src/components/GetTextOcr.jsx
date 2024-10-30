@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import generalStyles from "../assets/styles/generalStyles.module.css";
-import sheet from "../assets/icons/sheet.png";
+import copy from "../assets/icons/copy.png";
+import pdfFile from "../assets/icons/pdf-file.png";
+import document from "../assets/icons/document.png";
 import { jsPDF } from "jspdf";
 
 import { Document, Packer, Paragraph, TextRun } from "docx";
@@ -18,18 +20,22 @@ export const GetTextOcr = ({ ocr, setOcr, uploadFile }) => {
         setOcr(currentText);
     };
 
+    // copiar texto
     const handleCopyText = () => {
-        portaPapel.current.select();
-        document.execCommand("copy");
+        //para copiar un texto es necesario que primero se seleccione por eso el texto a copiar debe ser el que este en un textarea  si el texto no viene directamente de un textarea como estrategia podemos crear uno y  ocultar el elemento y accedemos a esa etiqueta.
+        portaPapel.current.select(); // selecciona el texto del textarea
+        document.execCommand("copy"); // copia el texto seleccionado
     };
 
+    // crear PDF
     const handleGetPdf = () => {
-        const doc = new jsPDF();
-        doc.text(ocr, 10, 10);
+        const doc = new jsPDF(); // se crear una instacia que es la que crear el archivo pdf
+        doc.text(ocr, 10, 10); //accede al metodo text que recibe el texto y las coordenadas iniciales donde se plasmará el texto
 
-        doc.save("output.pdf");
+        doc.save("output.pdf"); //guarda el archivo y genera un nombre del documento
     };
 
+    // crear Word
     const handleGetWord = async () => {
         const doc = new Document({
             sections: [
@@ -64,7 +70,7 @@ export const GetTextOcr = ({ ocr, setOcr, uploadFile }) => {
                 <div className={generalStyles.getTextBtnsContainer}>
                     <button className={generalStyles.btnGetText} onClick={handleCopyText}>
                         <img
-                            src={sheet}
+                            src={copy}
                             alt="iconText"
                             style={{ width: "1.3rem", marginRight: "0.5rem" }}
                         />
@@ -72,7 +78,7 @@ export const GetTextOcr = ({ ocr, setOcr, uploadFile }) => {
                     </button>
                     <button className={generalStyles.btnGetText} onClick={handleGetPdf}>
                         <img
-                            src={sheet}
+                            src={pdfFile}
                             alt="iconText"
                             style={{
                                 width: "1.3rem",
@@ -83,7 +89,7 @@ export const GetTextOcr = ({ ocr, setOcr, uploadFile }) => {
                     </button>
                     <button className={generalStyles.btnGetText} onClick={handleGetWord}>
                         <img
-                            src={sheet}
+                            src={document}
                             alt="iconText"
                             style={{ width: "1.3rem", marginRight: "0.5rem" }}
                         />

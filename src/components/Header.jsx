@@ -46,8 +46,7 @@ const themesStyles = [
         "--color-accent": "#C084FC",
     },
 ];
-export const Header = () => {
-    const [switchActive, setSwitchActive] = useState(false);
+export const Header = ({ switchActive, setSwitchActive }) => {
     const [theme, setTheme] = useState("default");
 
     const root = document.documentElement;
@@ -94,7 +93,7 @@ export const Header = () => {
                   "--color-gray": "#e5e7eb",
                   "--color-gray-hover": "#cdcfd3",
                   "--color": "black",
-                  "--background-light-dark": "none",
+                  "--background-light-dark": "white",
                   "--color-h3": "#374151",
                   "--color-placeholder": "none",
                   "--backgroundModal-light-dark": "#eff1f7",

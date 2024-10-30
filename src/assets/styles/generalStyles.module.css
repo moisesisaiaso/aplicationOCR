@@ -31,7 +31,10 @@ body {
 }
 
 .containerGrid {
-    padding: 2rem 1rem;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    padding: 2rem 1rem 1rem 1rem;
 }
 
 /** Header */
@@ -343,6 +346,19 @@ hr {
     width: 100%;
 }
 
+.container_btnGetText button {
+    background-color: #ff3b5c !important;
+}
+
+.container_btnGetText button:hover {
+    background-color: #f04a65 !important;
+}
+
+.container_btnGetText button:active {
+    background-color: #ff3b5c !important;
+    box-shadow: inset 2px 2px 5px #f04a65;
+}
+
 .btnGetText {
     width: 100%;
     padding: 1rem 0;
@@ -415,10 +431,46 @@ hr {
     flex-grow: 1;
 }
 
+/**contactame */
+.contact {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    right: 1.5rem;
+    bottom: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #e4e4e7;
+    width: 18rem;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 1px 4px rgb(147, 146, 146);
+}
+
+.contact:hover {
+    display: block;
+}
+
+.contact h2 {
+    margin-bottom: 1.5rem;
+}
+
+.contact img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.contact div {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    margin-top: 0.6rem;
+}
+
 /** footer */
 footer {
     display: flex;
-    justify-content: center;
+    height: 100%;
+    justify-content: space-between;
     align-items: center;
     padding-bottom: 1rem;
 }
@@ -429,6 +481,19 @@ footer h5 {
     letter-spacing: 1px;
     font-weight: 600;
     color: var(--color-h1);
+}
+
+.footerInfo {
+    cursor: pointer;
+}
+
+.footerInfo > img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.footerInfo:hover .contact {
+    display: block;
 }
 
 /* media query */
