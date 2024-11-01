@@ -96,19 +96,35 @@ export const useTypeDocument = (file, languagesJoin) => {
         const parser = new DOMParser(); //para analizar el HTML y extraer las imágenes.
         const doc = parser.parseFromString(html, "text/html");
         const elements = doc.body.childNodes; //abtengo todos los elementos hijos del body
-        console.log("elemento: " + elements[0].textContent.length);
+
+        // console.log("body elements: " + doc.body.childNodes[0].ELEMENT_NODE);
+        // console.log("elemento: " + elements[0].textContent.length);
         const textPromises = Array.from(elements).map(async (element) => {
-            //si el elemento es una imagen analiza con el OCR y retorna el texto
-            if (element.nodeName === "img") {
-                const src = element.src; // representación codificada de la imagen que está incrustada en el documento
-                const response = await fetch(src); //
+            // Verificar si el elemento es una imagen o un <p> vacío
+            if (
+                element.nodeName.toLowerCase() === "img" ||
+                (element.nodeName.toLowerCase() === "p" && element.textContent.length === 0)
+            ) {
+                let src;
+                if (element.nodeName.toLowerCase() === "img") {
+                    src = element.getAttribute("src"); // Obtener la representación codificada de la imagen
+                } else {
+                    // Si es un <p> vacío, tratarlo como una imagen
+                    const imgElement = document.createElement("img");
+                    imgElement.src = element.getAttribute("data-src"); // Asegúrate de que las imágenes tengan un atributo data-src
+                    src = imgElement.src;
+                    console.log("elemento: " + imgElement.nodeName);
+                    console.log("elemento: " + src);
+                }
+
+                const response = await fetch(src);
                 const blob = await response.blob();
                 const {
                     data: { text },
                 } = await worker.recognize(blob, undefined, outputOpts);
                 return text;
             } else {
-                //de lo contrario solo accede al texto editable del elemento y retorna
+                // Acceder al texto editable del elemento
                 return element.textContent;
             }
         });

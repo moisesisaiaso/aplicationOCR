@@ -7,6 +7,7 @@ import telephone from "./assets/icons/telephone.png";
 import question from "./assets/icons/question.png";
 import question1 from "./assets/icons/question1.png";
 import email from "./assets/icons/email.png";
+import file from "./assets/icons/file.png";
 
 import { ModalExpand } from "./components/ModalExpand";
 import { Languages } from "./components/Languages";
@@ -63,42 +64,6 @@ function App() {
     useEffect(() => {
         setOcr(ocrText);
     }, [ocrText]);
-
-    // const outputOpts = {
-    //     text: true,
-    //     blocks: true,
-    //     hocr: true,
-    //     tsv: true,
-    //     box: false,
-    //     unlv: false,
-    //     osd: false,
-    //     pdf: true,
-    //     imageColor: false,
-    //     imageGrey: false,
-    //     imageBinary: false,
-    // };
-
-    // const convertImageToText = async () => {
-    //     console.log("convertir");
-
-    //     // OJO para que tesseract funcione es necesario externalizarlo, esto se hace desde el archivo vite.config.js;  nos permite evitar conflictos con la libreria encuanto a sus duplicidad de dependencias entre otros
-    //     const worker = await Tesseract.createWorker(languagesJoin, 1, {
-    //         logger: (m) => console.log(m),
-    //     });
-    //     // Cargar el worker y el idioma
-
-    //     // Realizar el reconocimiento de texto:
-    //     const {
-    //         data: { text },
-    //     } = await worker.recognize(uploadFile, undefined, outputOpts);
-
-    //     setOcr(text);
-    //     console.log(text);
-
-    //     // Terminar el worker
-    //     await worker.terminate();
-    //     return text;
-    // };
 
     useEffect(() => {
         uploadImage && selectedLanguages.length !== 0
@@ -165,7 +130,29 @@ function App() {
                     }}
                 ></div>
                 <footer>
-                    <span></span>
+                    <div className={generalStyles.footerInfo}>
+                        <img src={switchActive ? question1 : question} alt="" />
+                        {/* contactame */}
+                        <div
+                            className={generalStyles.contact}
+                            style={{ left: "1.5rem", width: "21rem" }}
+                        >
+                            <h2>Qué puedo hacer?</h2>
+                            <p>
+                                Esta aplicación te permitirá capturar el texto de imagenes o
+                                archivos no editables en distintos idiomas
+                            </p>
+                            <h3>Archivos que reconoce: </h3>
+                            <div>
+                                <img src={telephone} alt="" />
+                                <span>Img: jpg, jpeg, png, gif, bmp, tiff</span>
+                            </div>
+                            <div>
+                                <img src={email} alt="" />
+                                <span>documentos: pdf,doc, docx, txt, csv, xls, xlsx, tab</span>
+                            </div>
+                        </div>
+                    </div>
                     <h5>&copy; DESARROLLADO POR MOISES ISAIAS ORTIZ GRACIA</h5>
                     <div className={generalStyles.footerInfo}>
                         <img src={switchActive ? question1 : question} alt="" />
