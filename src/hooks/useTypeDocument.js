@@ -92,43 +92,35 @@ export const useTypeDocument = (file, languagesJoin) => {
         });
 
         const arrayBuffer = await file.arrayBuffer(); // se utiliza para leer el contenido de un archivo o una respuesta HTTP y convertirlo en un ArrayBuffer
-        const { value: html } = await mammoth.convertToHtml({ arrayBuffer }); //para convertir el documento de Word a HTML.
-        const parser = new DOMParser(); //para analizar el HTML y extraer las imágenes.
+        const options = {
+            convertImage: mammoth.images.imgElement(async (image) => {
+                const imageBuffer = await image.readAsBase64String();
+                return {
+                    src: "data:" + image.contentType + ";base64," + imageBuffer,
+                };
+            }),
+        };
+        const { value: html } = await mammoth.convertToHtml({ arrayBuffer }, options);
+        const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
-        const elements = doc.body.childNodes; //abtengo todos los elementos hijos del body
+        const elements = doc.body.childNodes;
 
-        // console.log("body elements: " + doc.body.childNodes[0].ELEMENT_NODE);
-        // console.log("elemento: " + elements[0].textContent.length);
+        console.log(elements[0].nodeName);
         const textPromises = Array.from(elements).map(async (element) => {
-            // Verificar si el elemento es una imagen o un <p> vacío
-            if (
-                element.nodeName.toLowerCase() === "img" ||
-                (element.nodeName.toLowerCase() === "p" && element.textContent.length === 0)
-            ) {
-                let src;
-                if (element.nodeName.toLowerCase() === "img") {
-                    src = element.getAttribute("src"); // Obtener la representación codificada de la imagen
-                } else {
-                    // Si es un <p> vacío, tratarlo como una imagen
-                    const imgElement = document.createElement("img");
-                    imgElement.src = element.getAttribute("data-src"); // Asegúrate de que las imágenes tengan un atributo data-src
-                    src = imgElement.src;
-                    console.log("elemento: " + imgElement.nodeName);
-                    console.log("elemento: " + src);
-                }
-
+            if (element.nodeName.toLowerCase() === "img") {
+                const src = element.getAttribute("src");
                 const response = await fetch(src);
                 const blob = await response.blob();
                 const {
                     data: { text },
-                } = await worker.recognize(blob, undefined, outputOpts);
+                } = await Tesseract.recognize(blob);
                 return text;
             } else {
-                // Acceder al texto editable del elemento
                 return element.textContent;
             }
         });
-        const texts = await Promise.all(textPromises); //Promise.all() permite masnejar multiples promesas de foorma concurrente, se espera hasta que todas las procesas se resuelvan o si se rechaza alguna
+
+        const texts = await Promise.all(textPromises);
         setOcrText(texts.join("\n"));
 
         // Terminar el worker

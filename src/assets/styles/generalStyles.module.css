@@ -435,9 +435,14 @@ hr {
 footer {
     display: flex;
     height: 100%;
+    align-items: end;
+    padding-bottom: 1rem;
+}
+
+.footerContainer {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 1rem;
 }
 
 footer h5 {
@@ -446,6 +451,7 @@ footer h5 {
     letter-spacing: 1px;
     font-weight: 600;
     color: var(--color-h1);
+    margin-bottom: none;
 }
 
 .footerInfo {
@@ -484,6 +490,14 @@ footer h5 {
     margin-bottom: 1.5rem;
 }
 
+.contact h2,
+.contact h3,
+.contact_formatos {
+    margin-bottom: 1.5rem;
+    font-weight: 550;
+    color: #1f2937;
+}
+
 .contact img {
     width: 1.5rem;
     height: 1.5rem;
@@ -495,6 +509,7 @@ footer h5 {
     column-gap: 1rem;
     margin-top: 0.6rem;
 }
+
 /* media query */
 /*^ mobile (horizontal) */
 @media screen and (min-width: 480px) {

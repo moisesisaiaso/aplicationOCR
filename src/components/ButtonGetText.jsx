@@ -8,7 +8,9 @@ export const ButtonGetText = ({ completeData, getText }) => {
     const [loading, setLoading] = useState(false);
     const handleClick = async () => {
         setLoading(true);
-        await getText();
+        await getText().catch(() => {
+            console.log("error");
+        });
         setLoading(false);
 
         console.log("hola");
