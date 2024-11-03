@@ -41,14 +41,13 @@ function App() {
     const [extension, setExtension] = useState();
 
     const tiposImagen = ["jpg", "jpeg", "png", "gif", "bmp", "tiff"];
-    const tiposDocumento = ["doc", "docx", "txt", "csv", "xls", "xlsx", "tab"];
 
     const getText = async () => {
         if (tiposImagen.includes(extension)) {
             await typeImg();
-        } else if (tiposDocumento.includes(extension)) {
+        } else if (extension === "docx") {
             await typeDocument();
-        } else {
+        } else if (extension === "pdf") {
             await TypePdf();
         }
 
@@ -84,7 +83,6 @@ function App() {
                                 extension={extension}
                                 setExtension={setExtension}
                                 tiposImagen={tiposImagen}
-                                tiposDocumento={tiposDocumento}
                             />
                             {/* modal expand */}
                             <ModalExpand

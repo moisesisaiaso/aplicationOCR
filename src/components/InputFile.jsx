@@ -16,7 +16,6 @@ export const InputFile = ({
     extension,
     setExtension,
     tiposImagen,
-    tiposDocumento,
 }) => {
     const handleFileLoad = (e) => {
         const contents = e.target.result;
@@ -40,7 +39,7 @@ export const InputFile = ({
     useEffect(() => {
         if (extension === "pdf") {
             setUploadImage(pdf);
-        } else if (tiposDocumento.includes(extension)) {
+        } else if (extension === "docx") {
             setUploadImage(txt);
         }
     }, [extension]);

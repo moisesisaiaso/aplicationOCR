@@ -37,7 +37,7 @@ export const FooterContent = ({ switchActive }) => {
                             <img src={document} alt="" />
                             <span>
                                 <span className={generalStyles.contact_formatos}>Documentos:</span>{" "}
-                                PDF, DOC, DOCX, TXT, CSV, XLS, XLSX, TAB
+                                PDF, DOCX
                             </span>
                         </div>
                     </div>

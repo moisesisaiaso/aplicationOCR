@@ -106,9 +106,13 @@ export const useTypeDocument = (file, languagesJoin) => {
         const elements = doc.body.childNodes;
 
         console.log(elements[0].nodeName);
+        console.log(elements[0]);
+        console.log(elements[2].querySelector("img")?.nodeName);
         const textPromises = Array.from(elements).map(async (element) => {
-            if (element.nodeName.toLowerCase() === "img") {
-                const src = element.getAttribute("src");
+            if (element.querySelector("img")?.nodeName.toLowerCase() === "img") {
+                console.log("entra");
+
+                const src = element.querySelector("img").getAttribute("src");
                 const response = await fetch(src);
                 const blob = await response.blob();
                 const {

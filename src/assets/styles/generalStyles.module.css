@@ -441,8 +441,10 @@ footer {
 
 .footerContainer {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
+    column-gap: 0.5rem;
 }
 
 footer h5 {
@@ -451,7 +453,7 @@ footer h5 {
     letter-spacing: 1px;
     font-weight: 600;
     color: var(--color-h1);
-    margin-bottom: none;
+    margin-bottom: 0 !important;
 }
 
 .footerInfo {
