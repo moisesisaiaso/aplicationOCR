@@ -7,13 +7,13 @@
 :root {
     font-size: 16px;
 
-    /* themes */
+    /* themes default */
     --color-primary: #3b82f6;
     --color-primary-hover: #9875eb;
     --color-secondary: #10b981;
     --color-accent: #14de9b;
 
-    /* light - dark */
+    /* light - dark default */
     --background-color: none;
     --color-h1: #1f2937;
     --color-border: rgb(205, 205, 205);

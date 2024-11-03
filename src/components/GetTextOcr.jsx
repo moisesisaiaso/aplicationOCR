@@ -21,10 +21,14 @@ export const GetTextOcr = ({ ocr, setOcr, uploadFile }) => {
     };
 
     // copiar texto
-    const handleCopyText = () => {
-        //para copiar un texto es necesario que primero se seleccione por eso el texto a copiar debe ser el que este en un textarea  si el texto no viene directamente de un textarea como estrategia podemos crear uno y  ocultar el elemento y accedemos a esa etiqueta.
-        portaPapel.current.select(); // selecciona el texto del textarea
-        document.execCommand("copy"); // copia el texto seleccionado
+    const handleCopyText = async () => {
+        try {
+            portaPapel.current.select(); // ya que no estamos utilizando la forma antigua para copiar texto esto no seria necesario sin embargo lo estoy utilizando como indicador de que el texto que está señalado se copió
+            await navigator.clipboard.writeText(ocr);
+            alert("Texto copiado al portapapeles");
+        } catch (error) {
+            console.log("error al copiar el texto: ", error);
+        }
     };
 
     // crear PDF
