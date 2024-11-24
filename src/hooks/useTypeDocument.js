@@ -25,7 +25,7 @@ export const useTypeDocument = (file, languagesJoin) => {
     const typeImg = async () => {
         console.log("convertir");
 
-        // OJO para que tesseract funcione es necesario externalizarlo, esto se hace desde el archivo vite.config.js;  nos permite evitar conflictos con la libreria encuanto a sus duplicidad de dependencias entre otros
+        // OJO para que tesseract funcione es necesario externalizarlo, esto se hace desde el archivo vite.config.js;  nos permite evitar conflictos con la libreria en cuanto a sus duplicidad de dependencias entre otros
         const worker = await Tesseract.createWorker(languagesJoin, 1, {
             logger: (m) => console.log(m),
         });
